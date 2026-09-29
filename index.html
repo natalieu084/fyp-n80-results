@@ -1,0 +1,17 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FYP N=80 · Results & Notes</title>
+<style>body{font-family:system-ui,sans-serif;margin:0;display:grid;place-items:center;min-height:100vh;color:#173746;background:#f5f8f8}.box{max-width:560px;padding:28px;text-align:center}.spin{width:28px;height:28px;border:3px solid #d9e4e5;border-top-color:#173746;border-radius:50%;margin:0 auto 16px;animation:s 1s linear infinite}@keyframes s{to{transform:rotate(360deg)}}</style>
+</head><body><div class="box"><div class="spin"></div><b>Loading FYP N=80 report…</b><p>首次開啟可能需要幾秒。</p></div>
+<script>
+(async()=>{
+try{
+let b="";
+for(let i=1;i<=10;i++) b+=await (await fetch("payload-"+i+".txt")).text();
+const u=Uint8Array.from(atob(b),c=>c.charCodeAt(0));
+const ds=new DecompressionStream("gzip");
+const html=await new Response(new Blob([u]).stream().pipeThrough(ds)).text();
+document.open();document.write(html);document.close();
+}catch(e){document.body.innerHTML="<div class=box><b>Report failed to load.</b><p>Please refresh the page.</p></div>"}
+})();
+</script></body></html>
